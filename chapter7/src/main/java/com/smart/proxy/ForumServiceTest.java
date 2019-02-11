@@ -10,22 +10,25 @@ import java.lang.reflect.Proxy;
  */
 public class ForumServiceTest {
     @Test
-    public void proxy() {
-        //ForumService target = new ForumServiceImpl();
-        //
-        //PerformaceHandler handler = new PerformaceHandler(target);
-        //
-        //ForumService proxy = (ForumService) Proxy.newProxyInstance(
-        //        target.getClass().getClassLoader(),
-        //        target.getClass().getInterfaces(),
-        //        handler);
-        //
-        //proxy.removeForum(10);
-        //proxy.removeTopic(1012);
+    public void forumservice() {
+        ForumService target = new ForumServiceImpl();
+        PerformaceHandler handler = new PerformaceHandler(target);
+        ForumService proxy = (ForumService) Proxy.newProxyInstance(
+                target.getClass().getClassLoader(),
+                target.getClass().getInterfaces(),
+                handler);
 
+        proxy.removeForum(10);
+        proxy.removeTopic(1012);
+    }
+
+    @Test
+    public void proxy() {
         CglibProxy proxy = new CglibProxy();
         ForumServiceImpl forumService = (ForumServiceImpl)proxy.getProxy(ForumServiceImpl.class);
         forumService.removeForum(10);
         forumService.removeTopic(1023);
     }
+
+
 }
